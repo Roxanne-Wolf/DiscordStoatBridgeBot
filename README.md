@@ -41,7 +41,4 @@ Here is the steps needed to get started with using this source code.
 - For the Discord bot, make sure it has the Read Messages permission on the channel you are trying to bridge to your Stoat channel.
 - For the Stoat bot, make sure the bot has the "View Channel", "Send Messages", "Send Embeds", and "Use Masquerade" permissions (check channel overrides as well)
 5. Install everything from the requirements.txt file.
-6. Run the main.py file. Assuming you did all steps correctly, your Discord+Stoat bridge bot should work.
-| German (de)  | :x:                   | Google Translate                                   |
-
-| Turkish (tr) | :x:                   | Google Translate                                   |
+6. Run the main.py file.
