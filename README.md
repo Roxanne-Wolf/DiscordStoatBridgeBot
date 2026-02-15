@@ -2,6 +2,8 @@
 
 Made by: roxanne.wolf. (On Discord) / RoxanneWolf#6117 (On Stoat.chat)
 
+Fork: @jmg_studios (discord) / @JMG#59804 (stoat)
+
 ## About:
 
 This Discord+Stoat Bridge Bot source code allows you to connect your Discord and Stoat community together. This will allow your Discord and Stoat members to communicate with each other. This code is meant to be a simple and memory-efficient way to bridge your Discord and Stoat community.
@@ -33,7 +35,6 @@ Here is the steps needed to get started with using this source code.
 	"discordchannelid": DISCORD_CHANNEL_ID_HERE, => Replace DISCORD_CHANNEL_ID_HERE with your Discord channel ID
 	"discordwebhookurl": "", => Put in your Discord webhook url here.
 	"stoatchannelid": "", => Put in the Stoat channel ID here (Make sure the Stoat.chat bot has the "Use Masquerade" permission.
-	"lang": "", => Set the language code of the language. Defaults to English. (Refer to the supported languages section below)
 }
 ```
 4. Invite your Discord and Stoat bot to your servers
@@ -41,25 +42,6 @@ Here is the steps needed to get started with using this source code.
 - For the Stoat bot, make sure the bot has the "View Channel", "Send Messages", "Send Embeds", and "Use Masquerade" permissions (check channel overrides as well)
 5. Install everything from the requirements.txt file.
 6. Run the main.py file. Assuming you did all steps correctly, your Discord+Stoat bridge bot should work.
-
-## ToDo
-
-- Make it where the webhooks show the member's username instead of ID.
-- Get Translators to get better accurate translations
-- Command support for the Discord bot
-
-Please open an issue or pull request if you have a solution to any of these issues.
-
-## Supported Languages:
-
-- en = English (Default/Main)
-- es = Spanish
-- de = German
-- tr = Turkish
-
-| Language     | Verified translation? | Translation by (Stoat usernames)                   |
-|--------------|-----------------------|----------------------------------------------------|
-| English (en) | :white_check_mark:    | [RoxanneWolf#6117](https://gitlab.com/roxannewolf) |
-| Spanish (es) | :x:                   | Google Translate                                   |
 | German (de)  | :x:                   | Google Translate                                   |
+
 | Turkish (tr) | :x:                   | Google Translate                                   |
