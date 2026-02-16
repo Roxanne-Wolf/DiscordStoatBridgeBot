@@ -14,11 +14,11 @@ with open('config.json') as f:
 
 DISCORDBOTTOKEN = config.get('discordbottoken')
 DISCORDBOTPREFIX = config.get('discordbotprefix')
-REVOLTBOTTOKEN = config.get('stoatbottoken')
-REVOLTBOTPREFIX = config.get('stoatbotprefix')
+STOATBOTTOKEN = config.get('stoatbottoken')
+STOATBOTPREFIX = config.get('stoatbotprefix')
 DISCORDCHANNELID = config.get('discordchannelid')
 DISCORDWEBHOOKURL = config.get('discordwebhookurl')
-REVOLTCHANNELID = config.get('stoatchannelid')
+STOATCHANNELID = config.get('stoatchannelid')
 LANGSETTING = config.get('lang')
 
 def load_translations(lang=LANGSETTING):
@@ -32,20 +32,20 @@ def load_translations(lang=LANGSETTING):
 
 lang = LANGSETTING
 translation = load_translations(lang)
-stoatclient = commands.Bot(token=REVOLTBOTTOKEN, command_prefix=REVOLTBOTPREFIX)
+stoatclient = commands.Bot(token=STOATBOTTOKEN, command_prefix=STOATBOTPREFIX)
 
 @stoatclient.on(stoat.MessageCreateEvent)
 async def on_message(event: stoat.MessageCreateEvent):
     message = event.message
     if message.author_id == stoatclient.state.my_id:
         return
-    if message.channel.id == REVOLTCHANNELID:
+    if message.channel.id == STOATCHANNELID:
         webhook = SyncWebhook.from_url(DISCORDWEBHOOKURL)
-        webhook.send(f"{message.content}", username=f"{message.author.id}", avatar_url=f"{message.author.internal_avatar.attach_state(message.author.state, 'avatars').url()}", allowed_mentions=discord.AllowedMentions(everyone=False))
+        webhook.send(f"{message.content}", username=f"{message.author.name}", avatar_url=f"{message.author.internal_avatar.attach_state(message.author.state, 'avatars').url()}", allowed_mentions=discord.AllowedMentions(everyone=False))
 
 @stoatclient.command()
 async def help(ctx):
-    embed = stoat.SendableEmbed(title=f"{stoatclient.user.name}", description=f"{REVOLTBOTPREFIX}help - {translation['help-helpd']}\n{REVOLTBOTPREFIX}ping - {translation['help-pingd']}\n{REVOLTBOTPREFIX}botinfo - {translation['help-botinfod']}\n{REVOLTBOTPREFIX}debug - {translation['help-debugd']}\n{REVOLTBOTPREFIX}say\n{REVOLTBOTPREFIX}presence\n{REVOLTBOTPREFIX}status\n{REVOLTBOTPREFIX}statusreset")
+    embed = stoat.SendableEmbed(title=f"{stoatclient.user.name}", description=f"{STOATBOTPREFIX}help - {translation['help-helpd']}\n{STOATBOTPREFIX}ping - {translation['help-pingd']}\n{STOATBOTPREFIX}botinfo - {translation['help-botinfod']}\n{STOATBOTPREFIX}debug - {translation['help-debugd']}\n{STOATBOTPREFIX}say\n{STOATBOTPREFIX}presence\n{STOATBOTPREFIX}status\n{STOATBOTPREFIX}statusreset")
     await ctx.channel.send(embeds=[embed])
 
 @stoatclient.command()
@@ -65,13 +65,13 @@ async def debug(ctx, debugoption=""):
             await ctx.channel.send(embeds=[embed])
         except:
             await ctx.channel.send(translation['errormessage'])
-    if debugoption == "troubleshoot":
+    elif debugoption == "troubleshoot":
         embed = stoat.SendableEmbed(title=f"{stoatclient.user.name} {translation['debug-title']}", description=f"{translation['debug-troubleshoot']}")
         await ctx.channel.send(embeds=[embed])
-    if debugoption == "bot":
+    elif debugoption == "bot":
         embed = stoat.SendableEmbed(title=f"{stoatclient.user.name} {translation['debug-title']}", description=f"Bot ID: {stoatclient.state.my_id}\nUsers: {len(stoatclient.users)}")
         await ctx.channel.send(embeds=[embed])
-    if debugoption == "server":
+    elif debugoption == "server":
         embed = stoat.SendableEmbed(title=f"{stoatclient.user.name} {translation['debug-title']}", description=f"Server Name: {ctx.server.name}\nServer ID: {ctx.server.id}\nOwner ID: {ctx.server.owner_id}\nServer Discoverable?: {ctx.server.discoverable}")
         await ctx.channel.send(embeds=[embed])
     else:
@@ -80,9 +80,6 @@ async def debug(ctx, debugoption=""):
 @stoatclient.command()
 @commands.is_owner()
 async def say(ctx, *, message:str):
-    if any(word in message for word in blockedwords):
-        await ctx.send("Sorry but I will not say anything that is racist or promotes/encourages illegal activities")
-        return
     await ctx.channel.send(message)
 
 @stoatclient.command()
@@ -90,19 +87,19 @@ async def say(ctx, *, message:str):
 async def presense(ctx, presencetype=""):
     if presencetype == "online":
         await stoatclient.http.edit_my_user(status=stoat.UserStatusEdit(presence=pyvolt.Presence.online))
-        await ctx.channel.send("Bot status has been changed")
+        await ctx.channel.send("Bot status has been changed.")
     if presencetype == "idle":
         await stoatclient.http.edit_my_user(status=stoat.UserStatusEdit(presence=stoat.Presence.idle))
-        await ctx.channel.send("Bot status has been changed")
+        await ctx.channel.send("Bot status has been changed.")
     if presencetype == "focus":
         await stoatclient.http.edit_my_user(status=stoat.UserStatusEdit(presence=stoat.Presence.focus))
-        await ctx.channel.send("Bot status has been changed")
+        await ctx.channel.send("Bot status has been changed.")
     if presencetype == "dnd":
         await stoatclient.http.edit_my_user(status=stoat.UserStatusEdit(presence=stoat.Presence.busy))
-        await ctx.channel.send("Bot status has been changed")
+        await ctx.channel.send("Bot status has been changed.")
     if presencetype == "invisible":
         await stoatclient.http.edit_my_user(status=stoat.UserStatusEdit(presence=stoat.Presence.invisible))
-        await ctx.channel.send("Bot status has been changed")
+        await ctx.channel.send("Bot status has been changed.")
 
 @stoatclient.command()
 @commands.is_owner()
@@ -132,15 +129,12 @@ class DiscordBot(discord.Client):
         if message.webhook_id:
             return
         if message.channel.id == DISCORDCHANNELID:
-            await stoatclient.http.send_message(REVOLTCHANNELID, f"{message.content}", masquerade=stoat.MessageMasquerade(name=f"{message.author.name}", avatar=f"{message.author.avatar}"))
+            await stoatclient.http.send_message(STOATCHANNELID, f"{message.content}", masquerade=stoat.MessageMasquerade(name=f"{message.author.name}", avatar=f"{message.author.avatar}"))
 
 
 
 
 
-if "__main__" == __name__:
-    with open("blockedwords.txt", "r") as f:
-        blockedwords = f.read().splitlines()
 
 async def main():
     discordclient = DiscordBot()

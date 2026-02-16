@@ -4,9 +4,9 @@ Made by: roxanne.wolf. (On Discord) / RoxanneWolf#6117 (On Stoat.chat)
 
 ## About:
 
-This Discord+Stoat Bridge Bot source code allows you to connect your Discord and Stoat community together. This will allow your Discord and Stoat members to communicate with each other. This code is meant to be a simple and memory-efficient way to bridge your Discord and Stoat community.
+This Discord+Stoat Bridge Bot source code allows you to connect your Discord and Stoat community together. This will allow your Discord and Stoat members to communicate with each other. This code is meant to be a simple and memory-efficient way to bridge your Discord and Stoat community without the need of complex code or high memory usage.
 
-This project will only work for 1 Discord and 1 Stoat server.
+This project will only work for 1 Discord server and 1 Stoat server with the way it is designed.
 
 ## Requirements:
 
@@ -37,14 +37,13 @@ Here is the steps needed to get started with using this source code.
 }
 ```
 4. Invite your Discord and Stoat bot to your servers
-- For the Discord bot, make sure it has the Read Messages permission on the channel you are trying to bridge to your Stoat channel.
-- For the Stoat bot, make sure the bot has the "View Channel", "Send Messages", "Send Embeds", and "Use Masquerade" permissions (check channel overrides as well)
+- For the Discord bot, make sure it has the Read Messages and View Message History permission on the channel you are trying to bridge to your Stoat channel. Make sure to check channel overrides as well.
+- For the Stoat bot, make sure the bot has the following permissions: "View Channel", "Send Messages", "Send Embeds", and "Use Masquerade". Make sure to check channel overrides as well.
 5. Install everything from the requirements.txt file.
 6. Run the main.py file. Assuming you did all steps correctly, your Discord+Stoat bridge bot should work.
 
 ## ToDo
 
-- Make it where the webhooks show the member's username instead of ID.
 - Get Translators to get better accurate translations
 - Command support for the Discord bot
 
